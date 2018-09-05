@@ -11,7 +11,7 @@ except (IOError, ImportError):
 setup(
     packages = ['faultea'],
 
-    install_requires = ['numpy'],
+    install_requires = [],
     zip_safe = False,
 
     name = 'faultea',

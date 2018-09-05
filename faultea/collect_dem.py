@@ -7,7 +7,7 @@ import pyproj
 import numpy as np
 
 
-import download_dem
+from . import download_dem
 
 def get_dem_bounds(lonlat_pts):
     minlat = np.min(lonlat_pts[:,1])
@@ -58,7 +58,7 @@ def get_dem(zoom, bounds, n_width, dest_dir = 'dem_download'):
     maxlat, maxlon = bounds[2], bounds[3]
     expand = 0
     LON, LAT = np.meshgrid(
-        np.linspace(minlon - expand, maxlon + expand, n_width), 
+        np.linspace(minlon - expand, maxlon + expand, n_width),
         np.linspace(minlat - expand, maxlat + expand, n_width)
     )
     DEM = scipy.interpolate.griddata(
