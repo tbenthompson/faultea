@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.interpolate
-import collect_dem
+import scipy.sparse.csgraph
+from . import collect_dem
 import copy
 
 def remove_unused_pts(m):
@@ -63,7 +64,7 @@ def tri_connectivity_graph(tris):
     cols = np.array(cols)
     connectivity = scipy.sparse.coo_matrix((np.ones(rows.shape[0]), (rows, cols)), shape = (n_tris, n_tris))
     return connectivity
-   
+
 def get_connected_components(tris):
     return scipy.sparse.csgraph.connected_components(tri_connectivity_graph(tris))
 
@@ -90,7 +91,7 @@ def get_boundary_loop(m):
     which_comp = get_connected_components(m[1])[1]
     n_surfaces = np.unique(which_comp).shape[0]
     orderings = []
-    for surf_idx in range(2):
+    for surf_idx in range(n_surfaces):
         tri_subset = m[1][which_comp == surf_idx]
         free_edges = find_free_edges(tri_subset)
         pt_to_pt = [
