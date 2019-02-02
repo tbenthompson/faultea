@@ -12,6 +12,7 @@ def remove_unused_pts(m):
     new_tris = new_indices[m[1]]
     return (new_pts, new_tris)
 
+#TODO: This function is in tectosaur.continuity
 def get_surf_fault_edges(surf_tris, fault_tris):
     surf_verts = np.unique(surf_tris)
     surf_fault_edges = []
